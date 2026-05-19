@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
 require("dotenv").config();
 
@@ -43,6 +43,15 @@ async function run() {
     
 
 
+
+    app.get('/:id',async(req,res) => {
+     
+      const petData =await pets.collection('pet').find({
+        _id: new ObjectId(req.params.id)
+      }).toArray()
+      
+      await res.send(petData)
+    })
   } finally {
     // Ensures that the client will close when you finish/error
    
