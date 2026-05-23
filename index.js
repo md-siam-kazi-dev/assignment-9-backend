@@ -53,19 +53,19 @@ async function run() {
     });
 
     app.get('/user/:id',async(req,res) => {
-      
-      const user = await client.db('account').collection('account').find({
-       email:req.params.id
-      }).toArray()
+      console.log(req.params.id)
+     
 
-      console.log(user)
-      
-      
-      
-      
-      const petData = await pets.collection('pet').find({
-        ownerEmail:user[0].email,
+      const petData =await pets.collection('pet').find({
+        ownerEmail:req.params.id,
       }).toArray();
+      
+      
+      
+      
+      // const petData = await pets.collection('pet').find({
+      //   ownerEmail:user[0].email,
+      // }).toArray();
       res.send(petData)
       
     })
@@ -103,6 +103,35 @@ async function run() {
       const result = await pets.collection("pet").insertOne(petData);
       res.send(result);
     });
+
+    app.post('/pet/req',async(req,res) => {
+      const data  = req.body;
+      console.log(data.pet._id)
+      
+      const msg = await pets.collection('petreq').find({
+        
+          
+            'pet._id':data.pet._id
+          
+            
+        
+      }).toArray();
+      console.log(data);
+      console.log(msg)
+      res.send(msg)
+      
+    })
+
+
+
+    // delete 
+    app.delete('/pet/:id' ,async(req,res) => {
+       const result =await pets.collection('pet').deleteOne({
+        _id:new ObjectId(req.params.id),
+       })
+       res.send(result);
+
+    })
   } finally {
     // Ensures that the client will close when you finish/error
   }
