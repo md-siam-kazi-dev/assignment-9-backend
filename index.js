@@ -70,6 +70,11 @@ async function run() {
       
     })
 
+    app.get('/pet/req',async(req,res) => {
+      const petReqData = await pets.collection('petreq').find().toArray();
+      res.send(petReqData);
+    })
+
     //  post request function
     // add pet
     app.post("/addpet", async (req, res) => {
@@ -111,14 +116,23 @@ async function run() {
       const msg = await pets.collection('petreq').find({
         
           
-            'pet._id':data.pet._id
+            'pet._id':data.pet._id,
+            'user.email' : data.user.email
           
             
         
       }).toArray();
-      console.log(data);
-      console.log(msg)
-      res.send(msg)
+     if(msg.length != 0){
+      res.send({
+        requested:'Already Requested',
+      })
+     }else{
+
+      const rslt = await pets.collection('petreq').insertOne(data);
+      res.send(rslt);
+
+     }
+     
       
     })
 
