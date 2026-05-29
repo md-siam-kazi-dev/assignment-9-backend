@@ -238,5 +238,5 @@ app.get("/", (req, res) => {
 
 //Running server
 
-
+module.exports = app
 
