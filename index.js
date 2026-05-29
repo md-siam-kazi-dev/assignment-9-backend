@@ -52,23 +52,21 @@ async function run() {
     const pets = await client.db("pet");
 
     app.get("/allpets", async (req, res) => {
-      const search = req.query.search || '';
-      console.log(search)
+      const search = req.query.search || "";
+      console.log(search);
       let quary = {};
-      if(search){
+      if (search) {
         quary = {
-           petName:{
-            $regex:search,
-            $options:'i'
-           }
-          }
-        }
+          petName: {
+            $regex: search,
+            $options: "i",
+          },
+        };
+      }
 
-      
       const petData = await pets.collection("pet").find(quary).toArray();
       res.send(petData);
     });
-
 
     app.get("/6pets", async (req, res) => {
       const petData = await pets.collection("pet").find().toArray();
@@ -199,25 +197,23 @@ async function run() {
     app.patch("/pet/req/:status/:id", async (req, res) => {
       const id = req.params.id;
       const s = req.params.status;
-      console.log(id,s)
-       const rsl = await pets.collection('petreq').updateOne(
+      console.log(id, s);
+      const rsl = await pets.collection("petreq").updateOne(
         {
-          'pet._id':(id),
-        },{
-          $set:{
-
-            status:s
-
-
-          }
-        }
-       )
-       console.log(rsl)
+          "pet._id": id,
+        },
+        {
+          $set: {
+            status: s,
+          },
+        },
+      );
+      console.log(rsl);
     });
 
     app.put("/addpet", async (req, res) => {
       console.log(req.body);
-      
+
       const data = req.body;
       const id = data._id;
       delete data._id;
@@ -227,12 +223,11 @@ async function run() {
         },
         {
           $set: data,
-        }
+        },
       );
       console.log(msg);
     });
   } finally {
-    
   }
 }
 run().catch(console.dir);
