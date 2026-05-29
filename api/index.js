@@ -3,7 +3,7 @@ const cors = require("cors");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const jose = require("jose-cjs");
 
-require("dotenv").config();
+require("dotenv").config({ path: "../.env" });
 
 const app = express();
 
@@ -233,7 +233,11 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("api working");
+  res.send([
+    {
+      msg:'your api is working'
+    }
+  ]);
 });
 
 //Running server
