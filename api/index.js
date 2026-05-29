@@ -12,7 +12,7 @@ app.use(express.json());
 
 const uri = process.env.MONGO_URI;
 const JWKS = jose.createRemoteJWKSet(
-  new URL("http://localhost:3000/api/auth/jwks"),
+  new URL("http://myauthtoken.com/api/auth/jwks"),
 );
 const client = new MongoClient(uri, {
   serverApi: {
