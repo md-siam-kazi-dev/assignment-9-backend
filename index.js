@@ -78,6 +78,8 @@ async function run() {
       }
       res.send(sixPetData);
     });
+
+    //added very token
     app.get("/:id", verifyToken, async (req, res) => {
       console.log(req.headers.authorization);
       const petData = await pets
