@@ -3,7 +3,7 @@ const cors = require("cors");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const jose = require("jose-cjs");
 
-require("dotenv").config({ path: "../.env" });
+require("dotenv").config();
 
 const app = express();
 
