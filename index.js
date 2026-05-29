@@ -230,7 +230,7 @@ async function run() {
   } finally {
   }
 }
-run().catch(console.dir);
+run()
 
 app.get("/", (req, res) => {
   res.send([
@@ -240,6 +240,9 @@ app.get("/", (req, res) => {
   ]);
 });
 
+app.listen(() => {
+  console.log('run')
+})
 //Running server
 
 module.exports = app
