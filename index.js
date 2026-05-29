@@ -55,7 +55,7 @@ async function run() {
       const search = req.query.search || "";
       console.log(search);
       let quary = {};
-      if (search) {
+      if (search != "") {
         quary = {
           petName: {
             $regex: search,
