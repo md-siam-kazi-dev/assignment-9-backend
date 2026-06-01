@@ -12,7 +12,7 @@ app.use(express.json());
 
 const uri = process.env.MONGO_URI;
 const JWKS = jose.createRemoteJWKSet(
-  new URL("http://assignment-9-bvgd.vercel.app/api/auth/jwks"),
+  new URL("https://assignment-9-bvgd.vercel.app/api/auth/jwks"),
 );
 const client = new MongoClient(uri, {
   serverApi: {
@@ -240,7 +240,9 @@ app.get("/", (req, res) => {
   ]);
 });
 
-
+app.listen(5000,() => {
+  console.log('running')
+})
 //Running server
 
 module.exports = app
