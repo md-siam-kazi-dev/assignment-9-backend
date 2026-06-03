@@ -190,6 +190,10 @@ async function run() {
       const rlst = await pets.collection("pet").deleteOne({
         _id: new ObjectId(id),
       });
+      const x = await pets.collection('petreq').deleteMany({
+        'pet._id' :id
+
+      })
       console.log(rlst);
     });
 
