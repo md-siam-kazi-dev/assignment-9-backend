@@ -208,6 +208,18 @@ async function run() {
           },
         },
       );
+      if(s === 'accepted'){
+        const adoptChang = await pets.collection('pet').updateOne(
+        {
+          _id : new ObjectId(id),
+        },{
+          $set:{
+            isAdopted:true,
+          }
+        }
+
+      )
+      }
       console.log(rsl);
     });
 
